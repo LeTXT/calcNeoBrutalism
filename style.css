@@ -11,6 +11,8 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: #F9F5EC;
 }
 .containerBtn {
     /* max-width: 300px; */
@@ -76,6 +78,8 @@ button:active {
     border-radius: 11px;
 
     background-color: #F9F5EC;
+
+    box-shadow: 4px 4px 0 0 #2d2c27;
 }
 
 .containerScreen {
