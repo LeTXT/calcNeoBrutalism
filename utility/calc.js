@@ -34,7 +34,12 @@ const itsNumber = (eNumber) => {
 }
 
 const addSymbol = (eSymbol) => {
+    console.log(/\d/.test(input.value));
     
+
+    if(!/\d/.test(input.value)) {
+        return
+    }
     if(/[^\w\s]/.test(input.value.slice(-1))) {
         input.value = input.value.slice(0, -1)
         input.value += eSymbol;
