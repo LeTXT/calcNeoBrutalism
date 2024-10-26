@@ -82,7 +82,33 @@ button:active {
 }
 .containerScreen {
     display: flex;
-    justify-content: end;
+    justify-content: space-evenly;
 
     flex-direction: column;
+
+    padding: 0;
+}
+
+input {
+    height: 50%;
+
+    text-align: right;
+
+    font-size: 94px;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    color: #2D2C27;
+
+    background-color: #f3f3f500;
+
+    border: none;
+
+    margin: 0 24px;
+}
+.secundInput {
+    font-size: 36px;
+
+    opacity: .5;
 }
