@@ -3,9 +3,7 @@ const input = document.querySelector("#input")
 const secundInput = document.querySelector("#secundInput")
 
 let calculated = false
-
-const inputValue = input.value
-console.log(inputValue);
+let putPoint = true
 
 // Calcula quando o botão result é apertado
 const calc = () => {
@@ -32,7 +30,7 @@ const itsNumber = (eNumber) => {
         input.value += eNumber;
     } 
     if(calculated) {
-        secundinput.value = input.value
+        secundInput.value = input.value
         input.value = eNumber
         calculated = false
     }
@@ -42,11 +40,19 @@ const point = (e) => {
     console.log(/\./.test(input.value))
     console.log(input.value);
     
+    // Não tem ponto e não tem simbolo
     if(!/\./.test(input.value) && !/[^\w\s.]/.test(input.value)) {
         input.value += e
         return
     } 
-    if((input.value.match(/\./g) || []).length == 1) {
+    // Não tem ponto e tem simbolo
+    if(!/\./.test(input.value) && /[^\w\s.]/.test(input.value)) {
+        input.value += e
+        putPoint = false
+        return
+    }
+    // Tem apenas um ponto
+    if((input.value.match(/\./g) || []).length == 1 && putPoint) {
         input.value += e
         return
     }

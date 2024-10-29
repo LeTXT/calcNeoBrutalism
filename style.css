@@ -121,6 +121,8 @@ input {
     margin: 0 24px;
 
     outline: none;
+
+    cursor: default;
 }
 .secundInput {
     font-size: 36px;
