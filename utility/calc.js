@@ -7,15 +7,32 @@ let putPoint = true
 
 // Calcula quando o botão result é apertado
 const calc = () => {
-    console.log(input.value);
-    console.log(parseFloat(input.value));
-    console.log(eval(input.value.replace(/÷/g, "/").replace(/×/g, "*")));
-
     try {
-        const result = eval(input.value.replace(/÷/g, "/").replace(/×/g, "*"))
-        secundInput.value = input.value
-        input.value = result
-        calculated = true
+        // caso seja uma conta de porcentagem
+        if(/\%/.test(input.value)) {
+            // Procura o primeiro símbolo
+            const searchSymbol = input.value.search(/[^a-zA-Z0-9]/)
+            // Obtem o número até esse primeiro símbolo
+            const searchResult = input.value.substring(0, searchSymbol)
+            // Obtem o símbolo
+            const getSymbol = input.value.match(/[^a-zA-Z0-9]/)[0]
+            // Obtem o valor da porcentagem
+            const searchPercent = input.value.substring(searchSymbol + 1, input.value.length -1)
+
+            let percentValue = searchResult * searchPercent / 100
+
+            // adiciona conta no input.value
+            input.value = searchResult + getSymbol + percentValue
+        }
+                const result = eval(input.value.replace(/÷/g, "/").replace(/×/g, "*"))
+
+                secundInput.value = input.value
+
+                input.value = result.toFixed(2)
+                calculated = true
+           
+            
+        
     } catch (error) {
         console.error(error);
         input.value = "Error"
@@ -36,9 +53,14 @@ const itsNumber = (eNumber) => {
     }
 }
 
+const percent = (e) => {
+    if(!/\%/.test(input.value) && /[^\w\s]/.test(input.value) && /^\d+(\.\d+)?$/.test(input.value.slice(-1))) {
+        input.value += e
+    }
+    
+}
+
 const point = (e) => {
-    console.log(/\./.test(input.value))
-    console.log(input.value);
     
     // Não tem ponto e não tem simbolo
     if(!/\./.test(input.value) && !/[^\w\s.]/.test(input.value)) {
@@ -67,8 +89,13 @@ const addSymbol = (eSymbol) => {
         return
     }
     // Verifica se o botão apertado foi o "." ou "%"
-    if(eSymbol == ".") {
-        point(eSymbol)
+    if(eSymbol == "." || eSymbol == "%") {
+        if(eSymbol == ".") {
+            point(eSymbol)
+        }
+        if( eSymbol == "%") {
+            percent(eSymbol)
+        }
         return
     }
     // Verifica se já tem um sibolo, e caso tenha substitui o simbolo
